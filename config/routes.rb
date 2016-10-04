@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
  Rails.application.routes.draw do
 
+get "/", to: "home#inicial"
 get "/inicial", to: "home#inicial"
 get "/educacao", to: "home#educacao"
 get "/certificados", to: "home#certificados"
