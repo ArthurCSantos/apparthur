@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+nav {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+   <h1>Arthur Carvalho dos Santos</h1>
+</header>
+  
+<nav>
+  <ul>
+    <li><a href="/inicial">Início</a></li><br>
+    <li><a href="/educacao">Educação</a></li><br>
+    <li><a href="/ativcompl">Atividades Complementares</a></li><br>
+    <li><a href="/certificados">Bolsas e Certificados</a></li><br>
+    <li><a href="/exp_prof">Experiência Profissional</a></li><br>
+    <li><a href="/idiomas">Idiomas</a></li><br>
+    <li><a href="/informatica">Conhecimentos de Informática</a></li>
+  </ul>
+</nav>
+
+<article>
+
+  <h1>Atividades Complementares</h1>
+
+  <ul>
+    <li>Projeto de Iniciação Científica
+      <br>Tema: RTK positioning technique via RDS
+      <br>Orientador: Prof. Renato Alves Borges
+      <br>Instituição: Universidade de Brasília
+      <br>
+    </li>
+      
+      <br>
+    
+    <li>Monitoria de Laboratório de Eletromagnetismo II
+      <br>Professor: Plínio Ricardo Ganime Alves
+      <br>Instituição: Universidade de Brasília
+      <br>
+    </li>  
+      
+      <br>
+
+    <li>Monitoria de Física II
+      <br>Professor: Demétrio Antonio da Silva Filho
+      <br>Instituição: Universidade de Brasília
+      <br>
+    </li>
+  </ul>
+
+</article>
+
+<%= yield %>
+<footer></footer>
+
+</div>
+
+
+</body>
+</html>

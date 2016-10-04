@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+nav {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+   <h1>Arthur Carvalho dos Santos</h1>
+</header>
+  
+<nav>
+  <ul>
+    <li><a href="/inicial">Início</a></li><br>
+    <li><a href="/educacao">Educação</a></li><br>
+    <li><a href="/ativcompl">Atividades Complementares</a></li><br>
+    <li><a href="/certificados">Bolsas e Certificados</a></li><br>
+    <li><a href="/exp_prof">Experiência Profissional</a></li><br>
+    <li><a href="/idiomas">Idiomas</a></li><br>
+    <li><a href="/informatica">Conhecimentos de Informática</a></li>
+  </ul>
+</nav>
+
+<article>
+  <h1>Bolsas e Certificados</h1>
+
+    <ul>
+    <li>Participação na <b>I Escola Internacional de Energia Solar 2015</b>
+      <br>UnB, 28 horas 
+      <br>
+    </li>
+      
+      <br>
+    
+    <li>Bolsa para graduação sanduíche através do programa <b>Ciências sem Fronteiras/CAPES</b>
+      <br>Vigência: 2014
+      <br>
+    </li>  
+      
+      <br>
+
+    <li>Mini-cursos <b>Princípios de conversão CA/CC e Componente Principais de Sistema CC</b>
+      <br>ONS, 14 horas
+      <br>
+    </li>
+  </ul>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+</article>
+
+<%= yield %>
+<footer></footer>
+
+</div>
+
+
+</body>
+</html>

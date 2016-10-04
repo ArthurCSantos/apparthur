@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>RCS App</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= favicon_link_tag 'favicon.ico'%>
+
+    <%= stylesheet_link_tag    "site_interno", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "site_interno", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+
+
+    <style type="text/css">
+
+        .link_menu_interno{
+            padding: 5px 3px 5px 3px; 
+            display:inline-block;
+            font-size:0.7em;
+            color: #8a9fbe;
+            text-decoration: none;
+            border-bottom:solid 2px white;
+        }
+
+        .link_menu_interno.ativo{
+            border-bottom:solid 2px #54a4de;
+        }
+
+        .link_menu_interno:hover{
+            border-bottom:solid 2px #54a4de;
+            cursor: pointer;
+        }
+
+
+        .titulo_tela{
+            color: rgb(119, 119, 119);
+            width: 100%;
+            border-bottom: solid 1px #EEE;
+            margin: 0px;
+            padding: 2px 20px 0px 20px;
+        }
+
+        .form_logout{
+            width: 100%;
+            padding-bottom: 10px;
+        }
+
+        .botao_sair{
+            width: 100%;
+            border: none;
+            background: none;
+            text-align: left;
+            padding: 0px;
+        }
+
+        .posicao_avisos{
+            font-size: 0.9em;
+            position: fixed;
+            z-index: 10;
+            top: 61px;
+            right: 10px;
+            display: none;
+          }
+
+
+        .ideias {
+            color:#E6E633; 
+            margin:3px 10px; 
+            padding:0px 0px; 
+            background:white; 
+            border-radius:4px; 
+            border:solid 1px #E6E633;
+            cursor: pointer;
+            display: none;
+        }
+
+        .ideias:hover {
+            background: yellow;
+            color: #888;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <%= render :partial=>'layouts/flash_msgs' %>
+    <%= render :partial=>'chats/chat_fixed' %>
+    <div>
+
+        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+
+        
+
+
+        <div id="header-topbar-option-demo" class="page-header-topbar">
+
+            <div id="header-topbar-option-demo" class="page-header-topbar">
+
+                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+            
+
+                    <div class="navbar-header">
+                
+                        <button type="button" class="js_toggle_menu navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a id="logo" href="/" class="navbar-brand">
+                            <span class="fa fa-rocket"></span>
+                            <span class="logo-text" style="display: none">RCS</span>
+                            <span  class="logo-text-icon" style="text-align: left;">
+                                <%= image_tag(asset_path('logo_rcs_branco.png'), :style=>'width: 55px; margin: -15px 0px 0px -13px;') %>
+                                &nbsp;
+                                <span style="color: #A6BAD4;">SGM</span>
+                            </span>
+                        </a>
+
+                    </div>
+
+                    
+                    <div class="topbar-main">
+
+                        <a id="menu-toggle" href="#" class="hidden-xs">
+                            <i class="fa fa-bars"></i>
+                        </a>
+
+                        <div class="pull-left" style="margin:13px 20px;">
+                            <a href="/">
+                                <i class="fa fa-home"></i>
+                            </a>
+
+                            <% breadcrumb(request.path).each do |nome, link| %>
+
+                                &nbsp;&nbsp;
+                                <i class="fa fa-angle-right"></i>
+                                &nbsp;&nbsp;
+
+                                <% if request.path.gsub(/\?.*/, '')===link.gsub(/\?.*/, '') %>
+
+                                    <a href="<%= link %>" class="btn btn-xs btn-green" style="color:white;">
+                                        <%= nome %>
+                                    </a>
+
+                                <% else %>
+
+                                    <a href="<%= link %>" class="btn btn-xs btn-grey" style="color:white; background-color: #667882;">
+                                        <%= nome %>
+                                    </a>
+
+                                <% end %>
+
+                                
+
+                            <% end %>
+
+                        </div>
+                
+                        <ul class="nav navbar navbar-top-links navbar-right mbn">
+
+                            <li class="hidden-xs">
+                                <div class="ideias">
+                                    <i class="fa fa-lightbulb-o" style="font-size:1.3em;"></i>
+                                </div>
+                            </li>
+                            <li class="hidden-xs label label-grey">
+                                <%= current_usuario.role %>
+                            </li>
+                            <li class="hidden-xs label label-pink">
+                                <%= current_usuario.role_assinatura_compras %>
+                            </li>
+
+                            <li class="dropdown topbar-user">
+                                
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle">
+                                    <i class="fa fa-user hidden-xs"></i>
+                                    <span class="hidden-xs">&nbsp;<%= current_usuario.nome %>&nbsp;</span>
+                                    <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-user pull-right" style="box-shadow: 0px 5px 5px #888888 !important">
+                                    
+                                    <li>
+                                        <%= link_to mudar_senha_usuario_path(current_usuario.id) do %>
+                                            <i class="fa fa-user"></i>
+                                            Minha conta
+                                        <% end %>
+                                    </li>
+
+                                    <li class="divider"></li>
+
+                                    <li style="text-align:left;">
+                                        <a>
+                                            <%= button_to destroy_usuario_session_path, :method =>:delete, :class=>'botao_sair' do %>
+                                                <i class="fa fa-sign-out"></i>
+                                                Sair
+                                             <% end %>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="wrapper">
+
+            <nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
+                
+                <div class="sidebar-collapse menu-scroll">
+                    
+                    <ul id="side-menu" class="nav">
+                        
+                        <div class="clearfix"></div>
+                        
+                        <% menu_principal(current_usuario).each do |link| %>
+                            <li class="<%= 'active' if link['active'] %>">
+                                <a href="<%= link['path'] %>">
+                                    <span class="menu-title"><%= link['nome'].html_safe %></span>
+                                </a>
+                            </li>
+                        <% end %>
+
+                    </ul>
+                </div>
+            </nav>
+
+
+            <div id="page-wrapper">
+
+                <div class="page-content" style="padding:5px;">
+                    <div id="tab-general" class="layout-bock" style="position:relative; min-height: 90vh; overflow-x:scroll;">
+                        
+                        <h3 class="titulo_tela">
+                            <div class="pull-right" style="font-size:0.7em; font-weight:normal; margin-top:18px; color:#999;">
+                                <%= Time.now.in_time_zone.strftime('%d/%m/%y - %H:%M:%S') %>
+                            </div>
+
+
+                            <div style="margin-top: 10px;">
+                                <% 
+                                    opcoes_menu_interno = menu_interno(request.path, current_usuario) 
+                                    if opcoes_menu_interno and opcoes_menu_interno.first and opcoes_menu_interno.first.second.class == Hash
+                                        fazer_dropdown = true
+                                    else
+                                        fazer_dropdown = false
+                                    end
+                                %>
+
+
+                                <% if fazer_dropdown %>
+
+                                    <div style="margin: 0px 20px 10px 0px; display:inline-block;">
+                                        <%= yield :titulo_tela %>
+                                    </div>
+
+
+                                    <% opcoes_menu_interno.each do |nome_botao, opcoes| %>
+                                        <div style="display:inline-block;" class="dropdown">
+                                            <a data-hover="dropdown" href="#" class="link_menu_interno dropdown-toggle" style="border-bottom: solid 2px white;">
+                                                <%= nome_botao %> <span class="caret"></span>
+                                            </a>
+
+                                            <ul class="dropdown-menu" style="border-top: solid 2px #54a4de; box-shadow: 0px 5px 5px #888888 !important">
+                                                <% opcoes.each do |nome_link, path_link| %>
+                                                    <li>
+                                                        <%= link_to nome_link.html_safe, path_link %>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
+
+                                        </div>
+                                    <% end %>
+
+                                <% elsif opcoes_menu_interno %>
+
+                                    <div style="margin-bottom: 10px;">
+                                        <%= yield :titulo_tela %>
+                                    </div>
+
+
+                                    <% opcoes_menu_interno.each do |nome_link, path_link| %>
+
+                                        <%
+                                            active = nil
+                                            controllers = ['ausencias', 
+                                                           'compras/tipos_solicitacao',
+                                                           'compras/tipos_servico_contratado',
+                                                           'compras/produtos',
+                                                           'compras/produtos_solicitados',
+                                                           'compras/solicitacoes_produtos',
+                                                           'compras/tipos_produto',
+                                                           'compras/listas_produtos']
+
+                                            controllers.each do |c| 
+                                                if params['controller']==c and path_link.include?(c)
+                                                    active = true
+                                                end
+                                            end
+
+                                                
+                                            if not active
+                                                if params['controller']=='sgm_resolve'
+                                                    active = (request.fullpath==path_link)
+                                                else
+                                                    active = (request.path.gsub(/\?.*/, '')==path_link)
+                                                end
+                                            end
+
+                                        %>
+
+                                        <a href="<%= path_link %>" class="link_menu_interno <%= 'ativo' if active %>">
+                                            <i class="fa fa-caret-right" style="font-size:0.9em; vertical-align:top;"></i>
+                                            <div style="display:inline-block; text-align:left;">
+                                                <%= nome_link.html_safe %>
+                                            </div>
+                                        </a>
+                                        &nbsp;
+                                    <% end %>
+
+                                <% else %>
+
+                                    <div style="margin-bottom: 10px;">
+                                        <%= yield :titulo_tela %>
+                                    </div>
+
+                                <% end %>
+                            </div>
+
+
+                        </h3>
+
+                        <div class="page-content" style="padding-top:5px;">
+
+                            
+                            <div class="row" style="color: black; font-family: monospace; font-size: 1.2em;">
+                                <div class="col-lg-12">
+                                    <div style="border-bottom: dotted 1px #DDD; margin-bottom: 10px; margin-top:10px;">
+                                        <%= yield :subtitulo_tela %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="">
+                                <div class="col-lg-12">
+                                    <%= yield :menu_topo_conteudo %>
+                                </div>
+                            </div>
+
+                            <%= yield %>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        window.token = '<%= form_authenticity_token %>';
+
+        $('.js_toggle_menu').click(function(){
+            $('#sidebar').slideToggle();
+            $('#sidebar .sidebar-collapse menu-scroll').slideToggle();
+        });
+
+    </script>
+
+</body>
+
+
+</html>
