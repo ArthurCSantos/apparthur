@@ -2,13 +2,15 @@ Rails.application.routes.draw do
  Rails.application.routes.draw do
 
 get "/", to: "home#inicial"
-get "/inicial", to: "home#inicial"
-get "/educacao", to: "home#educacao"
-get "/certificados", to: "home#certificados"
-get "/idiomas", to: "home#idiomas"
-get "/exp_prof", to: "home#experienciaprof"
-get "/ativcompl", to: "home#ativcompl"
-get "/informatica", to: "home#informatica"
+
+get "/cv", to: "cv#dados_pessoais"
+get "/dados_pessoais", to: "cv#dados_pessoais"
+get "/educacao", to: "cv#educacao"
+get "/certificados", to: "cv#certificados"
+get "/idiomas", to: "cv#idiomas"
+get "/exp_prof", to: "cv#experienciaprof"
+get "/ativcompl", to: "cv#ativcompl"
+get "/informatica", to: "cv#informatica"
 
 end
 
