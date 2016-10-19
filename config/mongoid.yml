@@ -1,0 +1,23 @@
+development:
+  sessions:
+    default:
+      database: app_arthur_dev
+      hosts: 
+        - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: app_arthur_test
+      hosts: 
+        - localhost:27017
+
+staging:
+  sessions:
+    default:
+      uri: <%= ENV['MONGODB_URI'] %>
+
+production:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>
