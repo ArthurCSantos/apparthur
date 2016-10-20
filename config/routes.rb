@@ -19,6 +19,21 @@ Rails.application.routes.draw do
 			get :adicionar_materia
 			post :adicionar_materia
 		end
+		resources :provas do
+			collection do
+			
+			end
+		end
+
+		resources :trabalhos do
+			collection do
+				
+			end
+		end
+
 	end
 
+
+
+	
 end

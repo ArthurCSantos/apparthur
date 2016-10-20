@@ -7,6 +7,31 @@ div.container {
     border: 1px solid gray;
 }
 
+button:hover{
+    background-color: #ffffff; 
+    width: 50px;
+    height: 15px;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 2px;
+}
+
+button{
+    background-color: #000000; 
+    width: 50px;
+    height: 15px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
 header, footer {
     padding: 1em;
     color: white;
@@ -33,6 +58,7 @@ nav ul a {
 
 article {
     margin-left: 170px;
+    margin-right: 170px;
     border-left: 1px solid gray;
     padding: 1em;
     overflow: hidden;
@@ -56,47 +82,36 @@ article {
 </nav>
 
 <article>
-  <h1>
+
     Adicionar Matéria
     <%= form_tag materias_path do %>
       <%=text_field_tag 'nome',nil ,placeholder:'Nome da Matéria'%>
       <%=text_field_tag 'creditos',nil, placeholder:'Créditos'%>
-      <%=text_field_tag 'numero_de_provas',nil, placeholder:'Nº de Provas'%>
-      <%=text_field_tag 'numero_de_trabalhos',nil, placeholder:'Nº de Trabalhos'%>
-      <%=button_tag 'Adicionar'%>
+      <%=button_tag 'Adicionar', :class=>'button'%>
 
     <% end %>
-  </h1>
 
-  <h1>
     Remover Matéria 
     <%= form_tag remover_por_nome_materias_path, :method=> :delete do %>
       <%=text_field_tag 'nome',nil ,placeholder:'Nome da Matéria'%>
       <%=button_tag 'Remover'%>
 
     <% end %>
-  </h1>
-
-  <h1>
-      Matérias
-  </h1>
-  
   
     <div>
       <table border="0" width="790" ">
         <tr>
           <th>Nome</th>
           <th>Créditos</th>
-          <th>Nº de Provas</th>
-          <th>Nº de Trabalhos</th>
         </tr>
+
+
+
 
         <% Materia.all.each do |materia|%>
           <tr>
             <td align="center"><%=materia.nome %></td>
             <td align="center"><%=materia.creditos %></td>
-            <td align="center"><%=materia.numero_de_provas %></td>
-            <td align="center"><%=materia.numero_de_trabalhos %></td>
             <td align="center"><%=link_to('Ver',materia_path(materia.id)) %></td>
           </tr>
         <% end %>

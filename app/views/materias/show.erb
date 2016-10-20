@@ -2,10 +2,32 @@
 <html>
 <head>
 <style>
-div.container {
-    width: 100%;
-    border: 1px solid gray;
+
+button:hover{
+    background-color: #ffffff; 
+    width: 50px;
+    height: 15px;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 2px;
 }
+
+button{
+    background-color: #000000; 
+    width: 50px;
+    height: 15px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
 
 header, footer {
     padding: 1em;
@@ -17,18 +39,9 @@ header, footer {
 
 
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-   
-nav ul a {
-    text-decoration: none;
-}
-
 article {
-    margin-left: 170px;
     border-left: 1px solid gray;
+    border-right: 1px solid gray;
     padding: 1em;
     overflow: hidden;
 }
@@ -45,13 +58,80 @@ article {
 
 
 <article>
-  
+  <h1>
+    Provas     
+  </h1>
+  <%= form_tag materia_provas_path(@materia.id), :method=> :create do %>
+      <%= date_field_tag 'data' %>
+      <%= number_field_tag 'peso',nil ,placeholder:'Peso da Prova' %>
+      <%= number_field_tag 'nota',nil ,placeholder:'Nota da Prova',step: '0.1' %>
+      <%=button_tag 'Adicionar'%>
+
+    <% end %>
+
+    <div>
+      <table border="0" width="790" ">
+        <tr>
+          <th>Data</th>
+          <th>Prova</th>
+          <th>Nota</th>
+          <th>Peso</th>
+          <% i = 0 %>
+        </tr>
+
+        <% @materia.provas.each do |prova|%>
+          <tr>
+          <% i = i+1 %>
+            <td align="center"><%= prova.data %></td>
+            <td align="center"><%="Prova #{i}"%></td>
+            <td align="center"><%= prova.nota %></td>
+            <td align="center"><%= prova.peso %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  <h1>
+    Trabalhos     
+  </h1>
+  <%= form_tag materia_trabalhos_path(@materia.id), :method=> :create do %>
+    <%= date_field_tag 'data' %>
+    <%= text_field_tag 'nome',nil ,placeholder:'Nome do Trabalho' %>
+    <%= number_field_tag 'peso',nil ,placeholder:'Peso do Trabalho' %>
+    <%= number_field_tag 'nota',nil ,placeholder:'Nota do Trabalho' %>
+    <%=button_tag 'Adicionar'%>
+
+  <% end %>
+
+<div>
+      <table border="0" width="790" ">
+        <tr>
+          <th>Data</th>
+          <th>Nome</th>
+          <th>Nota</th>
+          <th>Peso</th>
+        </tr>
+
+        <% @materia.trabalhos.each do |trabalho|%>
+          <tr>
+            <td align="center"><%= trabalho.data %></td>
+            <td align="center"><%= trabalho.nome %></td>
+            <td align="center"><%= trabalho.nota %></td>
+            <td align="center"><%= trabalho.peso %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+
 
 </article>
 
 <%= yield %>
 
-<footer></footer>
+<footer>
+  <%=link_to('Voltar',materias_path) %>
+</footer>
 
 </div>
 

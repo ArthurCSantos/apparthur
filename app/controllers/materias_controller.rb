@@ -7,8 +7,6 @@ class MateriasController < ApplicationController
   	nova_materia = Materia.new
   	nova_materia.nome = params['nome']
   	nova_materia.creditos = params['creditos']
-  	nova_materia.numero_de_provas = params['numero_de_provas']
-  	nova_materia.numero_de_trabalhos = params['numero_de_trabalhos']
   	nova_materia.save!
 
   	redirect_to :back

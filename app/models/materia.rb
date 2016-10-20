@@ -7,6 +7,8 @@ class Materia
   field :numero_de_provas,       :type=>Integer, :default=>'3'
   field :numero_de_trabalhos,	 :type=>Integer, :default=>'0'
   
+  has_many :provas
+  has_many :trabalhos
   
 
 end
