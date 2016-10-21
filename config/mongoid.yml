@@ -17,7 +17,7 @@ staging:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
 
-production:
-  sessions:
-    default:
-      uri: <%= ENV['MONGODB_URI'] %>
+production: 
+  clients: 
+    default: 
+      uri: "mongodb://heroku_0hz479ds:1h42avgffts7n37tqh5scep6ol@ds061676.mlab.com:61676/heroku_0hz479ds"
